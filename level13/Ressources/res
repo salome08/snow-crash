@@ -1,0 +1,37 @@
+
+./level13 
+
+	-> "UID 2013 started us but we we expect 4242"
+
+____________________________________________
+
+strings level13 
+
+  ..
+  -> 	UID %d started us but we we expect %d
+  ..
+  ->	your token is %s 
+  ..
+
+On devine un code de la forme :
+if (x)
+	print(UID %d started us but we we expect %d)
+else
+	print(your token is %s)
+
+Du coup on se dit que ca serai bien de sauter le if en utilisant gdb
+____________________________________________
+
+
+
+-  gdb level13
+-  b main
+-  r
+-  jump *0x080485cb
+
+
+En gros on saute le if 
+
+Pour plus d'info sur l'explications des commandes gdb pas de soucis a l'oral mais a l'ecrit ce n'est pas pratique.
+
+

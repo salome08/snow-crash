@@ -1,0 +1,9 @@
+xxd -p level02.pcap
+Copy paste out VM (file popo)
+xxd -p -r popo > papa
+Drag n drop sur le site cloud shark, dans analysis tools, follow stream
+(Les points correspondent au code ascii pour DEL)
+
+
+(En revenant sur cet exo, la commande scp etait probablement ce qu'on voulait utiliser)
+(scp -P 4242 level02@10.13.0.97:level02.pcap .)

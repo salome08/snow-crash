@@ -1,0 +1,13 @@
+le token fourni est plus ou moins illisible, on peut imaginer qu’il a été encrypted d’une certaine manière.
+
+Quand on exécute ./level09 aaaaaa -> abcdefg
+
+En gros le cryptage c’est ajouter la valeur ascii de chaque caractère de la string avec son index dans la string. 
+
+Donc ba on fait un programme pour inverser le truc, voir le fichier en c (pck en vrai c rapide a coder aussi même si c moins swag que le Ruby ou le Perl ou le python )
+
+
+cd /tmp
+gcc -o exec prog.c
+./exec `cat ~/token`&& echo ""
+Su flag09 etc . . .

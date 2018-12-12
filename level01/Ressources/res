@@ -1,0 +1,4 @@
+ls /etc/
+cat /etc/passwd
+john sur le mdp en clair de flag01
+ (./john --show file)

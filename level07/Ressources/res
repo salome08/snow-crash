@@ -1,0 +1,17 @@
+On fait  cat level07
+
+Au milieu des caractères illisibles on voit :  LOGNAME /bin/echo %s
+
+Vu que logname est écrit en majuscule on se dit que c’est peut être une var d’environnement, on vérifie, et paf c’est le cas.
+
+Quand on execute level07 le shell affiche level07, or c’est aussi la valeur de LOGNAME dans l’env. 
+
+export LOGNAME=“Bonne nuit”
+
+Maintenant ./level07 affiche “Bonne nuit”
+
+Voila ya plus qu’a exploit
+
+export LOGNAME="\`getflag\`"
+
+PS: serieux c’est 25889544266985 plus facile que les exo precedents j’aurai préféré avoir cet exo en premier exercice limite . . . 

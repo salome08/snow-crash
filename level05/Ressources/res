@@ -1,0 +1,19 @@
+Apres avoir chercher environ 1500 ans, on va dans /var/mail/level05 et on voit un mail.
+C’est une crontab. En la lisantt on comprend que toutes les 2 minutes une tache est executée avec les droit de flag05 . Ca tombe bien on cherche justement a récupérer les droit de flag05…
+
+
+Donc toutes les deux minutes la cron fait : su -c "sh /usr/sbin/openarenaserver" - flag05
+
+
+Du coup on se demande qu’est ce que c’est /usr/sbin/openarenaserver
+
+Donc on va voir: cat /usr/sbin/openarenaserver
+
+Et la on tombe sur un script Shell qui exécute tous les fichier présent dans /opt/openarenaserver
+
+Voila tout est dit, on y crée un fichier pour qu’il soit executé par la cron dans 2 minutes max
+
+echo "getflag > /tmp/coucou" > /opt/openarenaserver/hola; chmod +x /opt/openarenaserver/hola
+
+
+on attend 2 minutes puis, cat /tmp/coucou, et paf un token sauvage apparait.

